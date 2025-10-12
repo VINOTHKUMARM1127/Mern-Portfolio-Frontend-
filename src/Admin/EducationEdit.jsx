@@ -13,7 +13,7 @@ const educationEdit = () => {
 
   const fetchEducationData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/get-education");
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/get-education`);
       seteducationData(response.data);
     } catch (err) {
       console.log(err);
@@ -28,11 +28,11 @@ const educationEdit = () => {
     try {
       if (editingId) {
         await axios.put(
-          `http://localhost:5000/update-education/${editingId}`,
+          `${import.meta.env.VITE_BACKEND_URL}/update-education/${editingId}`,
           form
         );
       } else {
-        await axios.post("http://localhost:5000/add-education", form);
+        await axios.post("${import.meta.env.VITE_BACKEND_URL}/add-education", form);
       }
       seteditingId(null);
       fetchEducationData();
@@ -44,7 +44,7 @@ const educationEdit = () => {
 
   const HandleDelete = async (editingId) => {
     try {
-      await axios.delete(`http://localhost:5000/delete-education/${editingId}`);
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/delete-education/${editingId}`);
       fetchEducationData();
     } catch (err) {
       console.log(err);

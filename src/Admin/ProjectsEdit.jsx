@@ -18,7 +18,7 @@ const ProjectsEdit = () => {
 
   const fetchProjectsData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/get-projects");
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/get-projects`);
       setprojectsData(response.data);
     } catch (err) {
       console.log(err);
@@ -47,12 +47,12 @@ const ProjectsEdit = () => {
 
       if (editingId) {
         await axios.put(
-          `http://localhost:5000/update-projects/${editingId}`,
+          `${import.meta.env.VITE_BACKEND_URL}/update-projects/${editingId}`,
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
       } else {
-        await axios.post("http://localhost:5000/add-projects", formData, {
+        await axios.post(`${import.meta.env.VITE_BACKEND_URL}/add-projects`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
       }
@@ -76,7 +76,7 @@ const ProjectsEdit = () => {
 
   const HandleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/delete-projects/${id}`);
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/delete-projects/${id}`);
       fetchProjectsData();
       alert("Project Deleted Successfully");
     } catch (err) {

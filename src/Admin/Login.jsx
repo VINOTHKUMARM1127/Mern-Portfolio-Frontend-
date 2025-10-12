@@ -12,7 +12,7 @@ const Login = () => {
   const getData = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/get-user?key=Developer@123`
+        `${import.meta.env.VITE_BACKEND_URL}/get-user?key=Developer@123`
       );
       const result = await res.json();
       setData(result);

@@ -8,7 +8,7 @@ const Projects = () => {
 
   const FetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/get-projects");
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/get-projects`);
       SetProjectData(response.data);
     } catch (err) {
       console.log(err);

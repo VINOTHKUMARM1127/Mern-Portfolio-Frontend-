@@ -6,7 +6,7 @@ const Education = () => {
 
   const FetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/get-education");
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/get-education`);
       setEduData(response.data);
     } catch (err) {
       console.log(err);

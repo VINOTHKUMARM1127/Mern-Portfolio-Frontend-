@@ -17,7 +17,7 @@ const DetailsEdit = () => {
 
   const fetchProjectsData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/get-details");
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/get-details`);
       setdetailsData(response.data);
     } catch (err) {
       console.log(err);
@@ -49,7 +49,7 @@ const DetailsEdit = () => {
         formData.append("Image", form.Image);
       }
       await axios.put(
-        `http://localhost:5000/update-details/${editingId}`,
+        `${import.meta.env.VITE_BACKEND_URL}/update-details/${editingId}`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

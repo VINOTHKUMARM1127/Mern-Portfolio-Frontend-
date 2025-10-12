@@ -8,7 +8,7 @@ const Main = () => {
 
     const FetchData = async ()=>{
         try{
-            const response = await axios.get("http://localhost:5000/get-details");
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/get-details`);
             setDetails(response.data)
         }catch(err){
             console.log(err);
@@ -19,8 +19,8 @@ const Main = () => {
     
     return (
         <section className='bg-[#171721] cut flex justify-center py-[5em]'>
-        {Details.map((item)=>(
-        <div className='w-[100%] lg:w-[90%] mx-auto my-0 flex flex-col-reverse lg:flex-row justify-evenly items-center'>
+        {Details.map((item,key)=>(
+        <div key={key} className='w-[100%] lg:w-[90%] mx-auto my-0 flex flex-col-reverse lg:flex-row justify-evenly items-center'>
             <div className='text-center lg:text-start w-[90vw] lg:w-[40vw]'>
                 <div className='text-[1.7em] md:text-[3em] font-black mt-4 md:mt-0'>
                 <div className='text-[1.4em] md:text-[1em] '>{item.Greetings}</div>
