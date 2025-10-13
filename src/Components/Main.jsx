@@ -26,13 +26,13 @@ const Main = () => {
   return (
     <section className="bg-[#171721] cut flex justify-center py-[5em]">
       {loading ? (
-        <div className="w-[100%] lg:w-[90%] mx-auto my-3 flex flex-col-reverse lg:flex-row justify-evenly items-center animate-pulse">
+        <div className="w-[100%] lg:w-[90%]  mx-auto flex flex-col-reverse lg:flex-row justify-evenly items-center animate-pulse">
           <div className="text-center lg:text-start w-[90vw] lg:w-[40vw]">
             <div className="text-[1.7em] md:text-[3em] font-black mt-4 md:mt-0">
-              <div className="h-6 md:h-8 bg-gray-700 rounded w-1/2 mx-auto lg:mx-0 mb-3"></div>
-              <div className="h-4 md:h-5 bg-gray-700 rounded w-3/4 mx-auto lg:mx-0 mb-3"></div>
+              <div className="h-8 md:h-8 bg-gray-700 rounded w-1/2 mx-auto lg:mx-0 mb-7"></div>
+              <div className="h-6 md:h-5 bg-gray-700 rounded w-3/4 mx-auto lg:mx-0 mb-7"></div>
             </div>
-            <div className="h-4 md:h-5 bg-gray-700 rounded w-2/3 mx-auto lg:mx-0 mb-5"></div>
+            <div className="h-4 md:h-5 bg-gray-700 rounded w-2/3 mx-auto lg:mx-0 mb-7"></div>
             <div className="h-3 md:h-4 bg-gray-700 rounded w-full mx-auto lg:mx-0 mb-5"></div>
             <div className="h-3 md:h-4 bg-gray-700 rounded w-full mx-auto lg:mx-0 mb-5"></div>
             <div className="h-3 md:h-4 bg-gray-700 rounded w-full mx-auto lg:mx-0 mb-5"></div>
