@@ -25,12 +25,12 @@ const Education = () => {
   const SkeletonLoading = ()=>{
     return Array.from({length:3}).map((item,i)=>(
           <div key={i} className="animate-pulse border border-[#b14fc4] rounded-xl w-[70%] md:w-[70%] py-4 px-2 mx-auto my-0 opacity-80 shadow-[0_0_6px_#d607ed] mb-8">
-          <div className=" px-2 md:px-5 text-[1.2em] rounded-md bg-gray-600 w-1/3 h-5 mb-2 font-bold opacity-90 "></div>
-          <div className=" px-2 md:px-5 text-[0.9em] rounded-md bg-gray-600 w-1/4 h-3 mb-2 opacity-60"></div>
-          <div className=" px-2 md:px-5 text-[0.9em] rounded-md bg-gray-600 w-1/6 h-3 mb-2 opacity-60"></div>
-          <div className=" px-2 md:px-5 text-[0.9em] rounded-md bg-gray-600 w-full h-3 mb-3 opacity-60"></div>
-          <div className=" px-2 md:px-5 text-[0.8em] rounded-md bg-gray-600 w-full h-3 mb-3 opacity-50 "></div>
-          <div className=" px-2 md:px-5 text-[0.9em] rounded-md bg-gray-600 w-full h-3 mb-2.5 opacity-70 text-justify"></div>
+          <div className=" px-2 md:px-5 rounded-md bg-gray-600 w-1/3 h-5 mb-2 font-bold opacity-90 "></div>
+          <div className=" px-2 md:px-5 rounded-md bg-gray-600 w-1/4 h-3 mb-2 opacity-60"></div>
+          <div className=" px-2 md:px-5 rounded-md bg-gray-600 w-1/6 h-3 mb-2 opacity-60"></div>
+          <div className=" px-2 md:px-5 rounded-md bg-gray-600 w-full h-3 mb-3 opacity-60"></div>
+          <div className=" px-2 md:px-5 rounded-md bg-gray-600 w-full h-3 mb-3 opacity-50 "></div>
+          <div className=" px-2 md:px-5 rounded-md bg-gray-600 w-full h-3 mb-2.5 opacity-70 text-justify"></div>
         </div>
   ))}
 
