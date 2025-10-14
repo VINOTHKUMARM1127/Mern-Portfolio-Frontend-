@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Details from "./Details";
 import axios from "axios";
+import Dummy from "../assets/dummypic.jpg"
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -30,12 +31,18 @@ const Projects = () => {
 
   const Skeletonloading = () => {
     return Array.from({ length: 3 }).map((i, k) => (
-      <div className="border border-[#1f1f1f] animate-pulse bg-[#171721] rounded-xl py-2 px-2 mx-auto my-0 opacity-80 shadow-[0_0_6px_#1f1f1f] mb-8 hover:bs hover:scale-105">
-        <div className="rounded-lg bg-gray-600 w-full min-h-[180px] min-w-[220px] mb-2"></div>
-        <div className=" bg-gray-600 w-3/4 h-3 mb-2 flex rounded-md my-1 text-[#9557ff]"></div>
-        <div className=" bg-gray-600 w-full h-3 mb-2 rounded-md mt-1"></div>
-        <div className=" bg-gray-600 w-full h-3 mb-2 rounded-md "></div>
-        <div className=" bg-gray-600 w-full h-3 mb-1 rounded-md "></div>
+      <div
+        key={k}
+        className="border border-[#1f1f1f] animate-pulse bg-[#171721] rounded-xl py-4 px-4 mx-auto my-0 opacity-80 shadow-[0_0_6px_#1f1f1f] mb-8"
+      >
+        <img src={Dummy} className="rounded-lg bg-gray-600 w-full min-h-[180px] min-w-[220px] mb-3"/>
+        <div className=" bg-gray-600 w-2/4 h-4 mb-2 rounded-md"></div>
+        <div className=" bg-gray-600 w-3/4 h-4 mb-2 rounded-md"></div>
+        <div className=" bg-gray-600 w-2/6 h-3 mb-2 rounded-md"></div>
+ 
+        <div className=" bg-gray-600 w-full h-3 mb-2 rounded-md"></div>
+        <div className=" bg-gray-600 w-full h-3 mb-2 rounded-md"></div>
+        <div className=" bg-gray-600 w-full h-3 mb-1 rounded-md"></div>
       </div>
     ));
   };
@@ -49,39 +56,37 @@ const Projects = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-[100%] mx-auto my-0">
-        {loading ? (
-          Skeletonloading()
-        ) : (
-          projectdata.map((item) => (
-            <div
-              key={item._id}
-              onClick={() => click(item)}
-              className="border border-[#1f1f1f] bg-[#171721] rounded-xl py-4 px-2 mx-auto my-0 opacity-80 shadow-[0_0_6px_#1f1f1f] mb-8 hover:bs hover:scale-105"
-            >
-              <img
-                src={item.Image}
-                alt=""
-                className="rounded-lg overflow-hidden min-h-[180px] min-w-[220px] px-1 mb-2"
-              />
-              <div className="px-2 py-1 flex gap-3 text-[0.8em] my-1 text-[#9557ff]">
-                {item.Tech?.split(",").map((tech, idx) => (
-                  <div key={idx} className="bg-[#854ce61F] rounded-md px-2">
-                    {tech}
-                  </div>
-                ))}
+        {loading
+          ? Skeletonloading()
+          : projectdata.map((item) => (
+              <div
+                key={item._id}
+                onClick={() => click(item)}
+                className="border border-[#1f1f1f] bg-[#171721] rounded-xl py-4 px-2 mx-auto my-0 opacity-80 shadow-[0_0_6px_#1f1f1f] mb-8 hover:bs hover:scale-105"
+              >
+                <img
+                  src={item.Image}
+                  alt=""
+                  className="rounded-lg overflow-hidden min-h-[180px] min-w-[220px] px-1 mb-2"
+                />
+                <div className="px-2 py-1 flex gap-3 text-[0.8em] my-1 text-[#9557ff]">
+                  {item.Tech?.split(",").map((tech, idx) => (
+                    <div key={idx} className="bg-[#854ce61F] rounded-md px-2">
+                      {tech}
+                    </div>
+                  ))}
+                </div>
+                <div className="px-4 text-[1.4em] mt-1 font-bold opacity-90 ">
+                  {item.ProjectName}
+                </div>
+                <div className="px-4 text-[0.8em] opacity-50 mb-1">
+                  {item.Year}
+                </div>
+                <div className="px-4 text-[1em] mb-5 opacity-70 text-justify line-clamp-3">
+                  {item.Description}
+                </div>
               </div>
-              <div className="px-4 text-[1.4em] mt-1 font-bold opacity-90 ">
-                {item.ProjectName}
-              </div>
-              <div className="px-4 text-[0.8em] opacity-50 mb-1">
-                {item.Year}
-              </div>
-              <div className="px-4 text-[1em] mb-5 opacity-70 text-justify line-clamp-3">
-                {item.Description}
-              </div>
-            </div>
-          ))
-        )}
+            ))}
       </div>
 
       {selectedProject && (
