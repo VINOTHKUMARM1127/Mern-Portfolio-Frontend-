@@ -8,7 +8,7 @@ const Education = () => {
   const FetchData = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/get-educatio`
+        `${import.meta.env.VITE_BACKEND_URL}/get-education`
       );
       setEduData(response.data);
       setLoading(false);
