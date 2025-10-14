@@ -11,7 +11,7 @@ const Projects = () => {
   const FetchData = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/get-project`
+        `${import.meta.env.VITE_BACKEND_URL}/get-projects`
       );
       SetProjectData(response.data);
       setloading(false);
