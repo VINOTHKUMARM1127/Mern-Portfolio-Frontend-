@@ -67,7 +67,7 @@ const educationEdit = () => {
 
   return (
     <section className="p-6 max-w-2xl mx-auto">
-      <div>Education Edit Page</div>
+      <div className="text-[1.8em] my-2">Education Edit Page</div>
       <form onSubmit={HandleSubmit} className="flex flex-col gap-3 my-5">
         <input
           required
