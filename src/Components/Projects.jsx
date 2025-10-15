@@ -30,7 +30,7 @@ const Projects = () => {
   };
 
   const Skeletonloading = () => {
-    return Array.from({ length: 3 }).map((i, k) => (
+    return Array.from({ length: 6 }).map((i, k) => (
       <div
         key={k}
         className="border border-[#1f1f1f] animate-pulse bg-[#171721] rounded-xl py-4 px-4 mx-auto my-0 opacity-80 shadow-[0_0_6px_#1f1f1f] mb-8"
