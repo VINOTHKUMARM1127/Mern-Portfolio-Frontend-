@@ -2,9 +2,11 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Await } from "react-router-dom";
+import Details from "../Components/Details";
 
 const ProjectsEdit = () => {
   const [projectsData, setprojectsData] = useState([]);
+  const [selectedProject, setSelectedProject] = useState(null);
   const [form, setForm] = useState({
     ProjectName: "",
     Description: "",
@@ -18,7 +20,9 @@ const ProjectsEdit = () => {
 
   const fetchProjectsData = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/get-projects`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/get-projects`
+      );
       setprojectsData(response.data);
     } catch (err) {
       console.log(err);
@@ -52,9 +56,13 @@ const ProjectsEdit = () => {
           { headers: { "Content-Type": "multipart/form-data" } }
         );
       } else {
-        await axios.post(`${import.meta.env.VITE_BACKEND_URL}/add-projects`, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
+        await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/add-projects`,
+          formData,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        );
       }
       alert("Project Uploaded Successfully");
       seteditingId(null);
@@ -76,141 +84,165 @@ const ProjectsEdit = () => {
 
   const HandleDelete = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/delete-projects/${id}`);
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/delete-projects/${id}`
+      );
       fetchProjectsData();
       alert("Project Deleted Successfully");
     } catch (err) {
       console.log(err);
     }
   };
-  const HandleEdit = (pro) => {
+  const HandleEdit = (item) => {
     setForm({
-      ProjectName: pro.ProjectName,
-      Description: pro.Description,
-      Link: pro.Link,
-      Image: pro.Image,
-      Github: pro.Github,
-      Tech: pro.Tech,
-      Year: pro.Year,
+      ProjectName: item.ProjectName,
+      Description: item.Description,
+      Link: item.Link,
+      Image: item.Image,
+      Github: item.Github,
+      Tech: item.Tech,
+      Year: item.Year,
     });
-    seteditingId(pro._id);
+    seteditingId(item._id);
   };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const click = (projects) => {
+    setSelectedProject(projects);
+  };
+
   return (
-    <section className="p-6 max-w-2xl mx-auto">
-      <div>Projects Edit Page</div>
-      <form onSubmit={HandleSubmit} className="flex flex-col gap-3 my-5">
-        <input
-          required
-          className="text-black border p-2 w-full"
-          type="text"
-          onChange={handleChange}
-          value={form.ProjectName}
-          name="ProjectName"
-          placeholder="ProjectName"
-        />
-        <input
-          required
-          className="text-black border p-2 w-full"
-          type="text"
-          onChange={handleChange}
-          value={form.Tech}
-          name="Tech"
-          placeholder="Tech"
-        />
-        <input
-          required
-          className="text-black border p-2 w-full"
-          type="text"
-          onChange={handleChange}
-          value={form.Year}
-          name="Year"
-          placeholder="Year"
-        />
-        <input
-          required
-          className="text-black border p-2 w-full"
-          type="text"
-          onChange={handleChange}
-          value={form.Link}
-          name="Link"
-          placeholder="Live Link"
-        />
-        <input
-          required
-          className="text-black border p-2 w-full"
-          type="text"
-          onChange={handleChange}
-          value={form.Github}
-          name="Github"
-          placeholder="Github Link"
-        />
-        <input
-          className=" border p-2 w-full"
-          type="file"
-          name="Image"
-          accept="image/*"
-          onChange={(e) => setForm({ ...form, Image: e.target.files[0] })}
-        />
-        <textarea
-          required
-          className="text-black border p-2 w-full"
-          onChange={handleChange}
-          value={form.Description}
-          name="Description"
-          placeholder="Description"
-        />
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2">
-          {editingId ? "Update Projects" : "Add Projects"}
-        </button>
-      </form>
-
-      <ul className="space-y-2">
-        {projectsData.map((pro) => (
-          <li
-            className="border p-2 flex justify-around md:justify-centre flex-col md:flex-row items-center"
-            key={pro._id}
-          >
-            <div className="w-[70%]">
-              {pro.Image && (
+    <div>
+      <section className="p-6 max-w-2xl mx-auto">
+        <div>Projects Edit Page</div>
+        <form onSubmit={HandleSubmit} className="flex flex-col gap-3 my-5">
+          <input
+            required
+            className="text-black border p-2 w-full"
+            type="text"
+            onChange={handleChange}
+            value={form.ProjectName}
+            name="ProjectName"
+            placeholder="ProjectName"
+          />
+          <input
+            required
+            className="text-black border p-2 w-full"
+            type="text"
+            onChange={handleChange}
+            value={form.Tech}
+            name="Tech"
+            placeholder="Tech"
+          />
+          <input
+            required
+            className="text-black border p-2 w-full"
+            type="text"
+            onChange={handleChange}
+            value={form.Year}
+            name="Year"
+            placeholder="Year"
+          />
+          <input
+            required
+            className="text-black border p-2 w-full"
+            type="text"
+            onChange={handleChange}
+            value={form.Link}
+            name="Link"
+            placeholder="Live Link"
+          />
+          <input
+            required
+            className="text-black border p-2 w-full"
+            type="text"
+            onChange={handleChange}
+            value={form.Github}
+            name="Github"
+            placeholder="Github Link"
+          />
+          <input
+            className=" border p-2 w-full"
+            type="file"
+            name="Image"
+            accept="image/*"
+            onChange={(e) => setForm({ ...form, Image: e.target.files[0] })}
+          />
+          <textarea
+            required
+            className="text-black border p-2 w-full"
+            onChange={handleChange}
+            value={form.Description}
+            name="Description"
+            placeholder="Description"
+          />
+          <button type="submit" className="bg-blue-500 text-white px-4 py-2">
+            {editingId ? "Update Projects" : "Add Projects"}
+          </button>
+        </form>
+      </section>
+      <section>
+        <div className="max-w-[70%] md:max-w-[80%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-[100%] mx-auto my-0">
+          {projectsData.map((item) => (
+            <div
+              key={item._id}
+              className="border border-[#1f1f1f] bg-[#171721] rounded-xl py-4 px-2 mx-auto my-0 opacity-80 shadow-[0_0_6px_#1f1f1f] mb-8 hover:bs hover:scale-105"
+            >
+              <div onClick={() => click(item)}>
                 <img
-                  src={pro.Image}
-                  alt={pro.ProjectName}
-                  className="w-32 h-20 object-cover"
+                  src={item.Image}
+                  alt=""
+                  className="rounded-lg overflow-hidden min-h-[180px] min-w-[220px] px-1 mb-2"
                 />
-              )}
+                <div className="px-2 py-1 flex gap-3 text-[0.8em] my-1 text-[#9557ff]">
+                  {item.Tech?.split(",").map((tech, idx) => (
+                    <div key={idx} className="bg-[#854ce61F] rounded-md px-2">
+                      {tech}
+                    </div>
+                  ))}
+                </div>
+                <div className="px-4 text-[1.4em] mt-1 font-bold opacity-90 ">
+                  {item.ProjectName}
+                </div>
+                <div className="px-4 text-[0.8em] opacity-50 mb-1">
+                  {item.Year}
+                </div>
+                <div className="px-4 text-[1em] mb-3 opacity-70 text-justify line-clamp-3">
+                  {item.Description}
+                </div>
+              </div>
 
-              <p>{pro.ProjectName}</p>
-              <p>{pro.Year}</p>
-              <p>{pro.Tech}</p>
-              <p>{pro.Link}</p>
-              <p>{pro.Github}</p>
-              <p className="break-words text-justify">{pro.Description}</p>
+              <div className="flex justify-center pb-1">
+                <button
+                  onClick={() => {
+                    HandleEdit(item);
+                  }}
+                  className="bg-blue-500 text-white px-2 py-1 rounded-md mr-2"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => HandleDelete(item._id)}
+                  className="bg-red-500 text-white px-2 py-1 rounded-md"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-            <div>
-              <button
-                onClick={() => {
-                  HandleEdit(pro);
-                }}
-                className="bg-blue-500 text-white px-2 py-1 rounded-md mr-2"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => HandleDelete(pro._id)}
-                className="bg-red-500 text-white px-2 py-1 rounded-md"
-              >
-                Delete
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </section>
+          ))}
+
+          {selectedProject && (
+            <Details
+              project={selectedProject}
+              onClose={() => setSelectedProject(null)}
+            />
+          )}
+        </div>
+      </section>
+    </div>
   );
 };
 
