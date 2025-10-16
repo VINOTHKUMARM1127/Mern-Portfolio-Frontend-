@@ -24,7 +24,7 @@ const Main = () => {
   }, []);
 
   return (
-    <section className="bg-[#171721] cut flex justify-center py-[5em]">
+    <section className="bg-[#171721] cut flex justify-center py-[1em] md:py-[5em]">
       {loading ? (
         <div className="w-[100%] lg:w-[90%]  mx-auto flex flex-col-reverse lg:flex-row justify-evenly items-center animate-pulse">
           <div className="text-center lg:text-start w-[90vw] lg:w-[40vw]">
@@ -53,8 +53,8 @@ const Main = () => {
             className="w-[100%] lg:w-[90%] mx-auto my-0 flex flex-col-reverse lg:flex-row justify-evenly items-center"
           >
             <div className="text-center lg:text-start w-[90vw] lg:w-[40vw]">
-              <div className="text-[1.7em] md:text-[3em] font-black mt-4 md:mt-0">
-                <div className="text-[1.4em] md:text-[1em] ">
+              <div className="text-[1.6em] md:text-[3em] font-black mt-4 md:mt-0">
+                <div className="text-[1.3em] md:text-[1em] ">
                   {item.Greetings}
                 </div>
                 <div className="text-[1.4em] md:text-[1em]">{item.Name}</div>
@@ -62,7 +62,7 @@ const Main = () => {
               <div className="text-[1.8em] md:text-[2em]   ">
                 {item.Desigination}
               </div>
-              <div className="text-[1em] md:text-[1.3em] opacity-70 mt-3">
+              <div className="text-[1em] md:text-[1.3em] opacity-70 mt-3 text-justify">
                 {item.Description}
               </div>
               <div

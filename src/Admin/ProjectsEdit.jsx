@@ -117,7 +117,7 @@ const ProjectsEdit = () => {
   return (
     <div>
       <section className="p-6 max-w-2xl mx-auto">
-        <div>Projects Edit Page</div>
+        <div className="text-[1.2em] md:text-[1.7em] text-center uppercase my-2">Projects Edit Page</div>
         <form onSubmit={HandleSubmit} className="flex flex-col gap-3 my-5">
           <input
             required
