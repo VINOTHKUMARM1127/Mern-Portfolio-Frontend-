@@ -17,7 +17,7 @@ const Projects = () => {
       setloading(false);
     } catch (err) {
       console.log(err);
-      setloading(true);
+      setloading(false);
     }
   };
 
