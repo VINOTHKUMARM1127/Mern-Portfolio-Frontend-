@@ -58,14 +58,14 @@ const educationEdit = () => {
     }
   };
 
-  const HandleEdit = (edu) => {
+  const HandleEdit = (item) => {
     setform({
-      CollegeName: edu.CollegeName,
-      Degree: edu.Degree,
-      Year: edu.Year,
-      Description: edu.Description,
+      CollegeName: item.CollegeName,
+      Degree: item.Degree,
+      Year: item.Year,
+      Description: item.Description,
     });
-    seteditingId(edu._id);
+    seteditingId(item._id);
   };
 
   const handleChange = (e) => {
@@ -141,14 +141,14 @@ const educationEdit = () => {
               <div className="flex justify-center pt-4 pb-2">
                 <button
                   onClick={() => {
-                    HandleEdit(edu);
+                    HandleEdit(item);
                   }}
                   className="bg-blue-500 text-white px-2 py-1 rounded-md mr-2"
                 >
                   Edit
                 </button>
                 <button
-                  onClick={() => HandleDelete(edu._id)}
+                  onClick={() => HandleDelete(item._id)}
                   className="bg-red-500 text-white px-2 py-1 rounded-md"
                 >
                   Delete
