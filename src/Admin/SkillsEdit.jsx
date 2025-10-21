@@ -7,6 +7,7 @@ const SkillsEdit = () => {
   const [form, setform] = useState({
     Skill: "",
     Icon: "",
+    Category: "",
   });
   const [editingId, seteditingId] = useState(null);
 
@@ -32,15 +33,17 @@ const SkillsEdit = () => {
           `${import.meta.env.VITE_BACKEND_URL}/update-skills/${editingId}`,
           form
         );
+        alert("Skill Updated");
       } else {
         await axios.post(
-          "${import.meta.env.VITE_BACKEND_URL}/add-skills",
+          `${import.meta.env.VITE_BACKEND_URL}/add-skills`,
           form
         );
+        alert("Skill Added");
       }
       seteditingId(null);
       fetchSkillsData();
-      setform({ Skill: "", Icon: ""});
+      setform({ Skill: "", Icon: "", Category: "" });
     } catch (err) {
       console.log(err);
     }
@@ -52,6 +55,7 @@ const SkillsEdit = () => {
         `${import.meta.env.VITE_BACKEND_URL}/delete-skills/${editingId}`
       );
       fetchSkillsData();
+      alert("Skill Deleted");
     } catch (err) {
       console.log(err);
     }
@@ -60,7 +64,8 @@ const SkillsEdit = () => {
   const HandleEdit = (item) => {
     setform({
       Skill: item.Skill,
-      Icon: item.Icon
+      Icon: item.Icon,
+      Category: item.Category,
     });
     seteditingId(item._id);
   };
@@ -72,7 +77,9 @@ const SkillsEdit = () => {
   return (
     <div>
       <section className="p-6 max-w-2xl mx-auto">
-        <div className="text-[1.2em] md:text-[1.7em] text-center uppercase my-2">Skills Edit Page</div>
+        <div className="text-[1.2em] md:text-[1.7em] text-center uppercase my-2">
+          Skills Edit Page
+        </div>
         <form onSubmit={HandleSubmit} className="flex flex-col gap-3 my-5">
           <input
             required
@@ -92,6 +99,19 @@ const SkillsEdit = () => {
             name="Icon"
             placeholder="Icon"
           />
+          <label htmlFor="Category">Select Category:</label>
+          <select
+            value={form.Category}
+            onChange={handleChange}
+            className="text-black border p-2 w-full"
+            name="Category"
+            id="Category"
+          >
+            <option value="Frontend">Frontend</option>
+            <option value="Backend">Backend</option>
+            <option value="Others">Others</option>
+          </select>
+
           <button type="submit" className="bg-blue-500 text-white px-4 py-2">
             {editingId ? "Update Skill" : "Add Skill"}
           </button>
@@ -99,17 +119,21 @@ const SkillsEdit = () => {
       </section>
 
       <section className="max-w-5xl mx-auto">
-        <div className="border border-[#b14fc4] bg-[#171721] rounded-xl px-0 mx-[10%] my-5 md:px-16 pb-8 lg:mx-0 lg:my-0 opacity-80 shadow-[0_0_10px_#d607ed]">
+        <div className="flex flex-col justify-center">
           {skillsData.map((item, id) => (
             <div
               key={id}
-              className="flex justify-center md:justify-evenly text-center flex-col lg:flex-row"
+              className="border border-[#b14fc4] bg-[#171721] rounded-xl mx-[10%] my-5 px-16 pb-8  opacity-80 shadow-[0_0_10px_#d607ed]"
             >
-              <div className="text-center text-[1.8em] my-4 font-bold">
-                {item.Skill}
+              <div className="flex">
+                <div className="text-center text-[1.3em] my-4 font-bold">
+                  {item.Skill}
+                </div>
+                <Icon icon={item.Icon} width="32" height="32" />
               </div>
-              <Icon icon={item.Icon} width="32" height="32" />
-
+              <div className="text-center text-[1.3em] my-4 font-bold">
+                {item.Category}
+              </div>
 
               <div className="flex justify-center pt-4 pb-2">
                 <button
