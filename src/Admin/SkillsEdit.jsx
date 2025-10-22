@@ -8,7 +8,9 @@ const SkillsEdit = () => {
     Skill: "",
     Icon: "",
     Category: "",
+    Order: "",
   });
+
   const [editingId, seteditingId] = useState(null);
 
   const fetchSkillsData = async () => {
@@ -27,6 +29,16 @@ const SkillsEdit = () => {
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
+
+    const existingOrder = skillsData.find(
+      (skill) =>
+        Number(skill.Order) === Number(form.Order)
+    );
+
+    if (existingOrder) {
+      alert("Order Already Exists");
+      return;
+    }
     try {
       if (editingId) {
         await axios.put(
@@ -43,7 +55,7 @@ const SkillsEdit = () => {
       }
       seteditingId(null);
       fetchSkillsData();
-      setform({ Skill: "", Icon: "", Category: "" });
+      setform({ Skill: "", Icon: "", Category: "", Order: "" });
     } catch (err) {
       console.log(err);
     }
@@ -66,6 +78,7 @@ const SkillsEdit = () => {
       Skill: item.Skill,
       Icon: item.Icon,
       Category: item.Category,
+      Order: item.Order,
     });
     seteditingId(item._id);
   };
@@ -88,8 +101,9 @@ const SkillsEdit = () => {
             onChange={handleChange}
             value={form.Skill}
             name="Skill"
-            placeholder="Skill"
+            placeholder="Enter Skill"
           />
+
           <input
             required
             className="text-black border p-2 w-full"
@@ -97,8 +111,9 @@ const SkillsEdit = () => {
             onChange={handleChange}
             value={form.Icon}
             name="Icon"
-            placeholder="Icon"
+            placeholder="Enter Icon"
           />
+
           <label htmlFor="Category">Select Category:</label>
           <select
             value={form.Category}
@@ -107,10 +122,21 @@ const SkillsEdit = () => {
             name="Category"
             id="Category"
           >
+            <option value="">-- Select Category --</option>
             <option value="Frontend">Frontend</option>
             <option value="Backend">Backend</option>
             <option value="Others">Others</option>
           </select>
+
+          <input
+            required
+            className="text-black border p-2 w-full"
+            type="number"
+            onChange={handleChange}
+            value={form.Order}
+            name="Order"
+            placeholder="Enter Order"
+          />
 
           <button type="submit" className="bg-blue-500 text-white px-4 py-2">
             {editingId ? "Update Skill" : "Add Skill"}
