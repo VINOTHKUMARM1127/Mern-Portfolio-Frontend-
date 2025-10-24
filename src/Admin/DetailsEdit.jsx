@@ -2,9 +2,12 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Await } from "react-router-dom";
+import PopUp from "../Components/PopUp";
 
 const DetailsEdit = () => {
   const [detailsData, setdetailsData] = useState([]);
+  const [popup, setPopup] = useState(false);
+  const [msg, setMsg] = useState("");
   const [form, setForm] = useState({
     Greetings: "",
     Name: "",
@@ -22,7 +25,7 @@ const DetailsEdit = () => {
       );
       setdetailsData(response.data);
     } catch (err) {
-      console.log(err);
+      shoowMsg(err);
     }
   };
 
@@ -55,7 +58,7 @@ const DetailsEdit = () => {
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      alert("Details Uploaded Successfully");
+      shoowMsg("Details Uploaded Successfully");
       seteditingId(null);
       fetchProjectsData();
       setForm({
@@ -68,7 +71,7 @@ const DetailsEdit = () => {
       });
     } catch (err) {
       console.log(err);
-      alert("Detail not Uploaded");
+      shoowMsg("Detail not Uploaded");
     }
   };
 
@@ -88,10 +91,21 @@ const DetailsEdit = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const shoowMsg = (msg) => {
+    setMsg(msg);
+    setPopup(true);
+    setTimeout(() => {
+      setPopup(false);
+    }, 3000);
+  };
+
   return (
     <div className="wapp">
+      {popup && <PopUp msg={msg} />}
       <section className="p-6 max-w-2xl mx-auto">
-        <div className="text-[1.2em] md:text-[1.7em] text-center uppercase my-2">Details Edit Page</div>
+        <div className="text-[1.2em] md:text-[1.7em] text-center uppercase my-2">
+          Details Edit Page
+        </div>
         <form onSubmit={HandleSubmit} className="flex flex-col gap-3 my-5">
           <input
             required
@@ -150,7 +164,7 @@ const DetailsEdit = () => {
         </form>
       </section>
 
-      <section className=" cut flex justify-center py-[1em] md:py-[5em] "> 
+      <section className=" cut flex justify-center py-[1em] md:py-[5em] ">
         {detailsData.map((item, key) => (
           <div
             key={key}

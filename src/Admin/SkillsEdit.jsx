@@ -4,6 +4,8 @@ import { Icon } from "@iconify/react";
 
 const SkillsEdit = () => {
   const [skillsData, setskillsData] = useState([]);
+  const [popup, setPopup] = useState(false);
+  const [msg, setMsg] = useState("");
   const [form, setform] = useState({
     Skill: "",
     Icon: "",
@@ -20,7 +22,7 @@ const SkillsEdit = () => {
       );
       setskillsData(response.data);
     } catch (err) {
-      console.log(err);
+      shoowMsg(err);
     }
   };
   useEffect(() => {
@@ -37,7 +39,7 @@ const SkillsEdit = () => {
     );
 
     if (existingOrder) {
-      alert("Order Already Exists");
+      shoowMsg("Order Already Exists");
       return;
     }
     try {
@@ -46,19 +48,19 @@ const SkillsEdit = () => {
           `${import.meta.env.VITE_BACKEND_URL}/update-skills/${editingId}`,
           form
         );
-        alert("Skill Updated");
+        shoowMsg("Skill Updated");
       } else {
         await axios.post(
           `${import.meta.env.VITE_BACKEND_URL}/add-skills`,
           form
         );
-        alert("Skill Added");
+        shoowMsg("Skill Added");
       }
       seteditingId(null);
       fetchSkillsData();
       setform({ Skill: "", Icon: "", Category: "", Order: "" });
     } catch (err) {
-      console.log(err);
+      shoowMsg(err);
     }
   };
 
@@ -68,9 +70,9 @@ const SkillsEdit = () => {
         `${import.meta.env.VITE_BACKEND_URL}/delete-skills/${editingId}`
       );
       fetchSkillsData();
-      alert("Skill Deleted");
+      shoowMsg("Skill Deleted");
     } catch (err) {
-      console.log(err);
+      shoowMsg(err);
     }
   };
 
@@ -90,8 +92,17 @@ const SkillsEdit = () => {
 
   const SkillOrder = ["Frontend", "Backend", "Others"];
 
+  const shoowMsg = (msg) => {
+    setMsg(msg);
+    setPopup(true);
+    setTimeout(() => {
+      setPopup(false);
+    }, 3000);
+  };
+
   return (
     <div>
+      {popup && <PopUp msg={msg} />}
       <section className="p-6 max-w-2xl mx-auto">
         <div className="text-[1.2em] md:text-[1.7em] text-center uppercase my-2">
           Skills Edit Page
@@ -151,8 +162,11 @@ const SkillsEdit = () => {
         <div className="grid grid-cols-1 sm:grid-cols-3">
           {skillsData
             .sort((a, b) => {
-              return SkillOrder.indexOf(a.Category) - SkillOrder.indexOf(b.Category);
-            }).map((item, id) => (
+              return (
+                SkillOrder.indexOf(a.Category) - SkillOrder.indexOf(b.Category)
+              );
+            })
+            .map((item, id) => (
               <section
                 key={id}
                 className="border border-[#b14fc4] bg-[#171721] rounded-xl mx-[10%] my-5 px-16 pb-8  opacity-80 shadow-[0_0_10px_#d607ed]"
