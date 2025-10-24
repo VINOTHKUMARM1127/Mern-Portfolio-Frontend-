@@ -8,6 +8,7 @@ const educationEdit = () => {
     Degree: "",
     Year: "",
     Description: "",
+    Order: "",
   });
   const [editingId, seteditingId] = useState(null);
 
@@ -41,7 +42,13 @@ const educationEdit = () => {
       }
       seteditingId(null);
       fetchEducationData();
-      setform({ CollegeName: "", Degree: "", Year: "", Description: "" });
+      setform({
+        CollegeName: "",
+        Degree: "",
+        Year: "",
+        Description: "",
+        Order: "",
+      });
     } catch (err) {
       console.log(err);
     }
@@ -64,6 +71,7 @@ const educationEdit = () => {
       Degree: item.Degree,
       Year: item.Year,
       Description: item.Description,
+      Order: item.Order,
     });
     seteditingId(item._id);
   };
@@ -75,7 +83,9 @@ const educationEdit = () => {
   return (
     <div>
       <section className="p-6 max-w-2xl mx-auto">
-        <div className="text-[1.2em] md:text-[1.7em] text-center uppercase my-2">Education Edit Page</div>
+        <div className="text-[1.2em] md:text-[1.7em] text-center uppercase my-2">
+          Education Edit Page
+        </div>
         <form onSubmit={HandleSubmit} className="flex flex-col gap-3 my-5">
           <input
             required
@@ -112,6 +122,17 @@ const educationEdit = () => {
             name="Description"
             placeholder="Description"
           />
+
+          <input
+            required
+            className="text-black border p-2 w-full"
+            type="number"
+            onChange={handleChange}
+            value={form.Order}
+            name="Order"
+            placeholder="Enter Order"
+          />
+
           <button type="submit" className="bg-blue-500 text-white px-4 py-2">
             {editingId ? "Update Education" : "Add Education"}
           </button>

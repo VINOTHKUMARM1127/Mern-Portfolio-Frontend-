@@ -32,7 +32,8 @@ const SkillsEdit = () => {
 
     const existingOrder = skillsData.find(
       (skill) =>
-        Number(skill.Order) === Number(form.Order)
+        Number(skill.Order) === Number(form.Order) &&
+        String(skill.Category) === String(form.Category)
     );
 
     if (existingOrder) {
@@ -86,6 +87,8 @@ const SkillsEdit = () => {
   const handleChange = (e) => {
     setform({ ...form, [e.target.name]: e.target.value });
   };
+
+  const SkillOrder = ["Frontend", "Backend", "Others"];
 
   return (
     <div>
@@ -145,40 +148,52 @@ const SkillsEdit = () => {
       </section>
 
       <section className="max-w-5xl mx-auto">
-        <div className="flex flex-col justify-center">
-          {skillsData.map((item, id) => (
-            <div
-              key={id}
-              className="border border-[#b14fc4] bg-[#171721] rounded-xl mx-[10%] my-5 px-16 pb-8  opacity-80 shadow-[0_0_10px_#d607ed]"
-            >
-              <div className="flex">
-                <div className="text-center text-[1.3em] my-4 font-bold">
-                  {item.Skill}
-                </div>
-                <Icon icon={item.Icon} width="32" height="32" />
-              </div>
-              <div className="text-center text-[1.3em] my-4 font-bold">
-                {item.Category}
-              </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3">
+          {skillsData
+            .sort((a, b) => {
+              return SkillOrder.indexOf(a.Category) - SkillOrder.indexOf(b.Category);
+            }).map((item, id) => (
+              <section
+                key={id}
+                className="border border-[#b14fc4] bg-[#171721] rounded-xl mx-[10%] my-5 px-16 pb-8  opacity-80 shadow-[0_0_10px_#d607ed]"
+              >
+                <div className="text-center">
+                  <h1 className="text-center text-[1.3em] my-4 font-bold">
+                    {item.Skill}
+                  </h1>
 
-              <div className="flex justify-center pt-4 pb-2">
-                <button
-                  onClick={() => {
-                    HandleEdit(item);
-                  }}
-                  className="bg-blue-500 text-white px-2 py-1 rounded-md mr-2"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => HandleDelete(item._id)}
-                  className="bg-red-500 text-white px-2 py-1 rounded-md"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
+                  <div className="flex justify-center">
+                    <Icon icon={item.Icon} width="32" height="32" />
+                  </div>
+
+                  <div className="flex justify-center gap-1">
+                    <h4 className="text-center text-[1em] my-4 font-bold">
+                      {item.Order}
+                    </h4>
+                    <h4 className="text-center text-[1em] my-4 font-bold">
+                      {item.Category}
+                    </h4>
+                  </div>
+
+                  <div className="flex justify-center pt-4 pb-2">
+                    <button
+                      onClick={() => {
+                        HandleEdit(item);
+                      }}
+                      className="bg-blue-500 text-white px-2 py-1 rounded-md mr-2"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => HandleDelete(item._id)}
+                      className="bg-red-500 text-white px-2 py-1 rounded-md"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </section>
+            ))}
         </div>
       </section>
     </div>

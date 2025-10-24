@@ -15,6 +15,7 @@ const ProjectsEdit = () => {
     Github: "",
     Tech: "",
     Year: "",
+    Order: "",
   });
   const [editingId, seteditingId] = useState(null);
 
@@ -43,6 +44,7 @@ const ProjectsEdit = () => {
       formData.append("Github", form.Github);
       formData.append("Tech", form.Tech);
       formData.append("Year", form.Year);
+      formData.append("Order", form.Order);
       if (form.Image instanceof File) {
         formData.append("Image", form.Image);
       } else {
@@ -75,6 +77,7 @@ const ProjectsEdit = () => {
         Github: "",
         Tech: "",
         Year: "",
+        Order: "",
       });
     } catch (err) {
       console.log(err);
@@ -102,6 +105,7 @@ const ProjectsEdit = () => {
       Github: item.Github,
       Tech: item.Tech,
       Year: item.Year,
+      Order: item.Order,
     });
     seteditingId(item._id);
   };
@@ -117,7 +121,9 @@ const ProjectsEdit = () => {
   return (
     <div>
       <section className="p-6 max-w-2xl mx-auto">
-        <div className="text-[1.2em] md:text-[1.7em] text-center uppercase my-2">Projects Edit Page</div>
+        <div className="text-[1.2em] md:text-[1.7em] text-center uppercase my-2">
+          Projects Edit Page
+        </div>
         <form onSubmit={HandleSubmit} className="flex flex-col gap-3 my-5">
           <input
             required
@@ -179,6 +185,17 @@ const ProjectsEdit = () => {
             name="Description"
             placeholder="Description"
           />
+
+          <input
+            required
+            className="text-black border p-2 w-full"
+            type="number"
+            onChange={handleChange}
+            value={form.Order}
+            name="Order"
+            placeholder="Enter Order"
+          />
+
           <button type="submit" className="bg-blue-500 text-white px-4 py-2">
             {editingId ? "Update Projects" : "Add Projects"}
           </button>
