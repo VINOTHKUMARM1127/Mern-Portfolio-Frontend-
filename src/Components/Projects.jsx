@@ -58,7 +58,7 @@ const Projects = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-[100%] mx-auto my-0">
         {loading
           ? Skeletonloading()
-          : projectdata.map((item) => (
+          : projectdata.sort((a,b)=> a.Order - b.Order).map((item) => (
               <div
                 key={item._id}
                 onClick={() => click(item)}

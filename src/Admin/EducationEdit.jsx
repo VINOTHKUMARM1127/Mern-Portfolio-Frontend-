@@ -144,7 +144,7 @@ const educationEdit = () => {
 
       <section className="max-w-5xl mx-auto">
         <div className="space-y-2">
-          {educationData.map((item, id) => (
+          {educationData.sort((a,b) => a.Order - b.Order).map((item, id) => (
             <div
               key={id}
               className="border border-[#b14fc4] rounded-xl w-[70%] md:w-[70%] py-4 px-2 mx-auto my-0 opacity-80 shadow-[0_0_6px_#d607ed] mb-8"
