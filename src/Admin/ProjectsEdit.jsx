@@ -203,7 +203,7 @@ const ProjectsEdit = () => {
       </section>
       <section>
         <div className="max-w-[70%] md:max-w-[80%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-[100%] mx-auto my-0">
-          {projectsData.map((item) => (
+          {projectsData.sort((a,b)=>a.Order - b.Order).map((item) => (
             <div
               key={item._id}
               className="border border-[#1f1f1f] bg-[#171721] rounded-xl py-4 px-2 mx-auto my-0 opacity-80 shadow-[0_0_6px_#1f1f1f] mb-8 hover:bs hover:scale-105"
@@ -226,6 +226,9 @@ const ProjectsEdit = () => {
                 </div>
                 <div className="px-4 text-[0.8em] opacity-50 mb-1">
                   {item.Year}
+                </div>
+                <div className="px-4 text-[0.8em] opacity-50 mb-1">
+                  {item.Order}
                 </div>
                 <div className="px-4 text-[1em] mb-3 opacity-70 text-justify line-clamp-3">
                   {item.Description}

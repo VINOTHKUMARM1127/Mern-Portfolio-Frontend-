@@ -34,11 +34,13 @@ const educationEdit = () => {
           `${import.meta.env.VITE_BACKEND_URL}/update-education/${editingId}`,
           form
         );
+        alert("Education Updated")
       } else {
         await axios.post(
           "${import.meta.env.VITE_BACKEND_URL}/add-education",
           form
         );
+        alert("Education Added")
       }
       seteditingId(null);
       fetchEducationData();
@@ -60,6 +62,7 @@ const educationEdit = () => {
         `${import.meta.env.VITE_BACKEND_URL}/delete-education/${editingId}`
       );
       fetchEducationData();
+      alert("Education Deleted")
     } catch (err) {
       console.log(err);
     }
@@ -154,6 +157,9 @@ const educationEdit = () => {
               </div>
               <div className=" px-2 md:px-5 text-[0.8em] opacity-50 mb-1">
                 {item.Year}
+              </div>
+              <div className=" px-2 md:px-5 text-[0.8em] opacity-50 mb-1">
+                {item.Order}
               </div>
               <div className=" px-2 md:px-5 text-[0.9em] opacity-70 text-justify">
                 {item.Description}
