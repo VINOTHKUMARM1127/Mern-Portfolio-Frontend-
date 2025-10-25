@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Icon } from "@iconify/react";
+import PopUp from "../Components/PopUp";
 
 const SkillsEdit = () => {
   const [skillsData, setskillsData] = useState([]);

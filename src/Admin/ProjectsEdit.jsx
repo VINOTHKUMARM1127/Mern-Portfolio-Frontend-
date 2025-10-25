@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Await } from "react-router-dom";
 import Details from "../Components/Details";
+import PopUp from "../Components/PopUp";
 
 const ProjectsEdit = () => {
   const [projectsData, setprojectsData] = useState([]);
