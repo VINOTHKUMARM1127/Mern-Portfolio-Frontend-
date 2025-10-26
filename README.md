@@ -1,7 +1,7 @@
 
 A **dynamic portfolio web application** built with the **MERN stack** (MongoDB, Express.js, React.js, Node.js), allowing the **admin** to manage portfolio data such as **education, skills, and projects** in real-time.
 
-**Live Demo:** [](#)
+**Live Demo:** [https://vinothkumarm27.netlify.app/](#)
 
 ---
 
@@ -9,7 +9,6 @@ A **dynamic portfolio web application** built with the **MERN stack** (MongoDB, 
 
 - [Features](#features)  
 - [Tech Stack](#tech-stack)  
-- [Screenshots](#screenshots)  
 - [Installation](#installation)  
 - [Usage](#usage)  
 - [API Endpoints](#api-endpoints)  
@@ -35,6 +34,5 @@ A **dynamic portfolio web application** built with the **MERN stack** (MongoDB, 
 
 - **Frontend:** React.js, Tailwind CSS  
 - **Backend:** Node.js, Express.js  
-- **Database:** MongoDB (Atlas)  
-- **Authentication :** JWT for admin login  
+- **Database:** MongoDB (Atlas)
 - **Others:** Axios for API calls, dotenv for environment variables  
