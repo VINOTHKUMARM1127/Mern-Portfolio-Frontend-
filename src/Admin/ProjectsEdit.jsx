@@ -215,7 +215,7 @@ const ProjectsEdit = () => {
       <section>
         <div className="max-w-[70%] md:max-w-[80%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-[100%] mx-auto my-0">
           {projectsData
-            .sort((a, b) => a.Order - b.Order)
+            .sort((b, a) => a.Order - b.Order)
             .map((item) => (
               <div
                 key={item._id}
@@ -227,12 +227,20 @@ const ProjectsEdit = () => {
                     alt=""
                     className="rounded-lg overflow-hidden min-h-[180px] min-w-[220px] px-1 mb-2"
                   />
-                  <div className="px-2 py-1 flex gap-3 text-[0.8em] my-1 text-[#9557ff]">
-                    {item.Tech?.split(",").map((tech, idx) => (
-                      <div key={idx} className="bg-[#854ce61F] rounded-md px-2">
-                        {tech}
-                      </div>
-                    ))}
+                  <div className="px-2 py-1 flex flex-wrap gap-3 text-[0.8em] my-1 text-[#9557ff]">
+                    {item.Tech?.split(",")
+                      .slice(0, 2)
+                      .map((tech, idx) => (
+                        <div
+                          key={idx}
+                          className="bg-[#854ce61F] rounded-md px-2"
+                        >
+                          {tech}
+                        </div>
+                      ))}
+                    {item.Tech?.split(",").length > 2 && (
+                      <div className="bg-[#854ce61F] rounded-md px-2">...</div>
+                    )}
                   </div>
                   <div className="px-4 text-[1.4em] mt-1 font-bold opacity-90 ">
                     {item.ProjectName}
