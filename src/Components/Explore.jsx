@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const Explore = () => {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const seen = sessionStorage.getItem("exploreSeen");

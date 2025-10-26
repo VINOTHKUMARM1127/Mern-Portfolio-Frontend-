@@ -1,20 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 
-const PopUp = ({msg}) => {
+const PopUp = ({ msg }) => {
   const [visible, setVisible] = useState(true);
   const [count, setCount] = useState(3);
 
-
-
   useEffect(() => {
-    if (visible) {
+    if (!visible) return;
       document.body.style.overflow = "hidden";
-      const timer = setInterval(()=>{setCount((p)=> p-1)},1000)
-      return ()=>clearInterval(timer)
-    } else {
-      document.body.style.overflow = "auto";
-    }
+      const timer = setInterval(() => {
+        setCount((p) => {
+          if (p < 1) {
+            setVisible(false);
+            return 0;
+          }
+          return p - 1;
+        });
+      }, 1000);
+      return () => {
+        clearInterval(timer);
+        document.body.style.overflow = "auto";
+      };
+    
   }, [visible]);
+
   return (
     <div
       className={`w-[100vw] h-full ${
@@ -25,11 +33,11 @@ const PopUp = ({msg}) => {
         <div className="pb-2 text-[1.5em] font-extrabold text-violet-600">
           {msg}
         </div>
-        <div className='absolute top-2 right-2 bg-violet-600 rounded-full py-0 px-2 hover:bg-slate-500'>{count}</div>
+        <div className="absolute top-2 right-2 bg-violet-600 rounded-full py-0 px-2 hover:bg-slate-500">
+          {count}
+        </div>
         <div className="opacity-60">
-          <div className="pb-2 ">
-            
-          </div>
+          <div className="pb-2 "></div>
         </div>
         <button
           onClick={() => {
