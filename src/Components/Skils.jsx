@@ -26,9 +26,9 @@ const Skils = () => {
   const skeleton = () => {
     return (
       <div className="flex justify-center gap-3 flex-wrap">
-        {Array.from({ length: 6 }).map((sk, key) => (
+        {Array.from({ length: 6 }).map((sk, ke) => (
           <div
-            key={key}
+            key={ke}
             className="rounded-lg px-6 py-3 bg-gray-600 w-28 h-10 mb-3 opacity-60 animate-pulse"
           ></div>
         ))}
@@ -46,8 +46,8 @@ const Skils = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {Category.map((sk)=>(
-        <section className="border border-[#b14fc4] bg-[#171721] rounded-2xl p-6 opacity-90 shadow-[0_0_10px_#d607ed] hover:shadow-[0_0_20px_#d607ed] transition-all duration-300">
+        {Category.map((sk,key)=>(
+        <section key={key} className="border border-[#b14fc4] bg-[#171721] rounded-2xl p-6 opacity-90 shadow-[0_0_10px_#d607ed] hover:shadow-[0_0_20px_#d607ed] transition-all duration-300">
           <div className="text-center text-[1.6em] my-4 font-bold text-white">
             {sk}
           </div>
