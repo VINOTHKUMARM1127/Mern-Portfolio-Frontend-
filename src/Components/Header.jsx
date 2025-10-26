@@ -28,14 +28,14 @@ const Header = () => {
     py-5 sticky top-0"
     >
       <div className="w-[90%] lg:w-[85%] flex justify-between mx-auto my-0">
-        <div
+        <button
           onClick={() => {
             loginVerify ? navigate("/Edit-page") : navigate("/login");
           }}
           className="text-[1.5em] font-bold cursor-pointer"
         >
           Devfolio
-        </div>
+        </button>
         <div className=" lg:block">
           <div
             className={`${
