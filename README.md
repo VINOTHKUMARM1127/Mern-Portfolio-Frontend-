@@ -58,22 +58,29 @@ MERN-Portfolio/
 ```bash
 git clone https://github.com/yourusername/mern-portfolio.git
 cd mern-portfolio
+```
 
-2. Install dependencies
+### 2. Install dependencies
+```bash
 Backend
 npm install
 
+
 Frontend
 npm install
+```
 
-3. Setup Environment Variables
+### 3. Setup Environment Variables
+```bash
 
 Create a .env file inside the server/ folder and add:
 
 MONGO_URI=your_mongodb_connection_string
 PORT=5000
+```
 
-4. Run the app
+### 4. Run the app
+```bash
 Run backend
 cd server
 npm start
@@ -81,8 +88,9 @@ npm start
 Run frontend
 cd client
 npm start
+```
 
-🌍 Deployment
+### 🌍 Deployment
 
 Frontend: Deploy the React app on Netlify
  or Vercel
@@ -95,10 +103,10 @@ Backend: Deploy Node.js + Express API on Render
 
 Connect frontend API calls to your live backend URL.
 
-🧑‍💻 Author
+## 🧑‍💻 Author
 
-Vinoth Kumar
-Frontend Developer | MERN Stack Enthusiast
+### Vinoth Kumar
+Mern Developer | MERN Stack Enthusiast
 📧 [vinothkumarm1127@gmail.com
 ]
 🌐 [https://vinothkumarm27.netlify.app/]
